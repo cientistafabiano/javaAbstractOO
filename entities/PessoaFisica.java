@@ -1,6 +1,6 @@
 package entities;
 
-public class PessoaFisica extends Pessoa {
+public class PessoaFisica extends Contribuinte {
 	private Double gastoSaude;
 	//overload
 	public PessoaFisica() {
@@ -21,13 +21,18 @@ public class PessoaFisica extends Pessoa {
 	
 	@Override
 	public double imposto() {
-		if (super.getRendaAnual() < 20000.0) {
-			return 0.15;
+		double impostoBasico;
+		if (getRendaAnual() < 20000.0) {
+			impostoBasico = getRendaAnual() * 0.15;
 		} else {
-			return 0.25;
+			impostoBasico = getRendaAnual() * 0.25;
 		}
-		//if (gastoSaude > 0) {
-		//	return super.getRendaAnual() - gastoSaude * 0.5;
-		//}
+		if (gastoSaude > 0) {
+			impostoBasico -= getGastoSaude() * 0.5;
+			if (impostoBasico < 0) {
+				impostoBasico = 0.0;
+			}
+		}
+		return impostoBasico;
 	}
 }

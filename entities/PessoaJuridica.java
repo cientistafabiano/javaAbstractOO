@@ -1,6 +1,6 @@
 package entities;
 
-public class PessoaJuridica extends Pessoa {
+public class PessoaJuridica extends Contribuinte {
 	private Integer nFuncionario;
 
 	//overload
@@ -23,7 +23,12 @@ public class PessoaJuridica extends Pessoa {
 	
 	@Override
 	public double imposto() {
-		// TODO Auto-generated method stub
-		return 0;
+		double impostoBasico;
+		if (getnFuncionario() > 10) {
+			impostoBasico = super.getRendaAnual() * 0.14;
+		} else {
+			impostoBasico = super.getRendaAnual() * 0.16;
+		}
+		return impostoBasico;
 	}	
 }

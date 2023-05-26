@@ -1,15 +1,15 @@
 package entities;
 
-public abstract class Pessoa {
+public abstract class Contribuinte {
 	private String name;
 	private Double rendaAnual;	
 	//methods abstract
 	public abstract double imposto();		
 	//overload
-	public Pessoa() {
+	public Contribuinte() {
 	}
 	//constructor
-	public Pessoa(String name, Double rendaAnual) {
+	public Contribuinte(String name, Double rendaAnual) {
 		this.name = name;
 		this.rendaAnual = rendaAnual;
 	}
@@ -27,13 +27,13 @@ public abstract class Pessoa {
 		this.rendaAnual = rendaAnual;
 	}
 	
-	public String toString() {
+	/*public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(name);
+		sb.append(getName());
 		sb.append(": $ ");
-		sb.append(String.format("%.2f", rendaAnual));
+		sb.append(String.format("%.2f", getRendaAnual()));
 
 		return sb.toString();
-	}
+	}*/
 }

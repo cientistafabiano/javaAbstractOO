@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import entities.Pessoa;
+import entities.Contribuinte;
 import entities.PessoaFisica;
 import entities.PessoaJuridica;
 
@@ -15,16 +15,19 @@ public class Applications {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		List<Pessoa> list = new ArrayList<>();
+		List<Contribuinte> list = new ArrayList<>();
 		
-		System.out.print("Insira o número de jogadores fiscais ");
+		System.out.print("Insira o número de Contribuintes: ");
 		int n = sc.nextInt();
 		for (int i=1;i<=n;i++) {
-			System.out.println("Dados do #" + i + "jogador fiscal: ");
+			System.out.println("Dados do #" + i + " contribuinte: ");
 			System.out.print("Individual or company (i/c): ");
 			char ch = sc.next().charAt(0);
-			System.out.print("Nome");
-			String name = sc.nextLine();
+			System.out.print("Nome: ");
+			String name = sc.next();
+			//por algum motivo nao pegava o getName() entao tive q colocar o next()
+			//espera-se dois nomes como sao apenas um temos que pular linha
+			//sc.nextLine();
 			System.out.print("Renda anual: ");
 			double rendaAnual = sc.nextDouble();
 			if (ch == 'i') {
@@ -38,12 +41,17 @@ public class Applications {
 			}
 		}
 		System.out.println();
-		System.out.println("Impostos pagos: ");
-		for (Pessoa pessoa : list) {
-			pessoa.imposto();
+		System.out.println("Impostos pagos por cada contribuinte: ");
+		for (Contribuinte contribuinte : list) {
+			System.out.println(contribuinte.getName() + 
+										": $ " + 
+										String.format("%.2f", contribuinte.imposto()));			
 		}
-		
-		//System.out.printf("Impostos totais: $%.2f", );
+		double sum = 0.0;
+		for (Contribuinte contribuinte : list) {
+			sum += contribuinte.imposto();
+		}
+		System.out.printf("Impostos totais: $ %.2f", sum);
 		sc.close();
 	}
 }
